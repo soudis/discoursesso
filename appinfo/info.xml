@@ -9,17 +9,14 @@
 Discourse can then be used as an external app inside Nextcloud.]]></description>
     <licence>agpl</licence>
     <author mail="florian.humer@gmail.com" homepage="https://habidat.org">Florian Humer</author>
-    <version>0.0.1</version>
+    <version>0.9.0</version>
     <namespace>DiscourseSSO</namespace>
     <category>auth</category>
     <bugs>https://github.com/soudis/nextcloud-discoursesso/issues</bugs>
     <dependencies>
         <nextcloud min-version="12" max-version="12"/>
     </dependencies>
-    <navigations>
-        <navigation>
-            <name>Discourse S S O</name>
-            <route>discoursesso.page.index</route>
-        </navigation>
-    </navigations>
+    <settings>
+        <admin>OCA\DiscourseSSO\Settings\Admin</admin>
+    </settings>    
 </info>
