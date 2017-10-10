@@ -70,7 +70,7 @@ class DiscourseController extends Controller {
 		// );
 
 		// build query string and redirect back to the Discourse site
-		$query = $ssoHelper->getSignInString($nonce, $userId, $userEmail, NULL);
+		$query = $ssoHelper->getSignInString($nonce, $userId, $userEmail);
 		$url = $this->config->getAppValue($this->appName, 'clienturl', '');
 		$this->logger->error('url: '.$url, array('app' => 'discoursesso'));
 
