@@ -51,7 +51,7 @@ class DiscourseController extends Controller {
 		if (!($ssoHelper->validatePayload($payload,$signature))) {
 		    // invaild, deny
 		    header("HTTP/1.1 403 Forbidden");
-		    echo("Bad SSO request, appName: " .$this->appName." payload: ".$sso.", signature:".$sig." secret: ".$secret);
+		    echo("Bad SSO request");
 		    die();
 		}
 
