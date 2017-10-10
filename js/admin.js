@@ -1,8 +1,7 @@
-<?php
 /**
- * @copyright Copyright (c) 2016, Joas Schilling <coding@schilljs.com>
+ * @copyright Copyright (c) 2017, florian humer <florian.humer@gmail.com>
  *
- * @author Joas Schilling <coding@schilljs.com>
+ * @author Florian Humer <florian.humer@gmail.com>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -21,18 +20,18 @@
  *
  */
 
+$(document).ready(function() {
+	var $secret = $('#discoursesso').find('.discoursesso_clientsecret');
+	var $url = $('#discoursesso').find('.discoursesso_clienturl');
 
-script('discoursesso', 'admin');
 
-/** @var array $_ */
-/** @var \OCP\IL10N $l */
-?>
-<div id="discoursesso" class="section">
-	<h2 class="inlineblock"><?php p($l->t('Discourse SSO')); ?></h2>
-	<p class="settings-hint"><?php p($l->t('Configure SSO information for Discourse')); ?></p>
+	$secret.change(function(event) {
+		var value = event.val;
+		OC.AppConfig.setValue('discoursesso', 'discoursesso_clientsecret', value);
+	});
 
-	<p>
-		<input type="text" name="discoursesso_clientsecret" class="discoursesso_clientsecret" value="<?php p($_['discoursesso_clientsecret']) ?>" style="width: 320px;" />
-		<input type="url" name="discoursesso_clienturl" class="discoursesso_clienturl" value="<?php p($_['discoursesso_clienturl']) ?>" style="width: 320px;" />
-	</p>
-</div>
+	$url.change(function(event) {
+		var value = event.val;		
+		OC.AppConfig.setValue('discoursesso', 'discoursesso_clienturl', value);
+	});
+});
