@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>discoursesso</id>
+    <name>Discourse S S O</name>
+    <summary>Enable Discourse to authenticate via Nextcloud</summary>
+    <description><![CDATA[Discourse has it&#39;s own SSO protocol, that needs an specially designed endpoint to authenticate with. This app implements this endpoint and allows Discourse instances to authenticate against an Nextcloud instance.
+
+Discourse can then be used as an external app inside Nextcloud.]]></description>
+    <licence>agpl</licence>
+    <author mail="florian.humer@gmail.com" homepage="https://habidat.org">Florian Humer</author>
+    <version>0.0.1</version>
+    <namespace>DiscourseSSO</namespace>
+    <category>auth</category>
+    <bugs>https://github.com/soudis/nextcloud-discoursesso/issues</bugs>
+    <dependencies>
+        <nextcloud min-version="12" max-version="12"/>
+    </dependencies>
+    <navigations>
+        <navigation>
+            <name>Discourse S S O</name>
+            <route>discoursesso.page.index</route>
+        </navigation>
+    </navigations>
+</info>
