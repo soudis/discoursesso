@@ -14,12 +14,14 @@ class DiscourseController extends Controller {
 	private $userId;
 	private $config;
 	private $logger;
+	private $userManager;
 
-	public function __construct($AppName, IRequest $request, IConfig $config, ILogger $logger, $UserId){
+	public function __construct($AppName, IRequest $request, IConfig $config, IUserManager $userManager, ILogger $logger, $UserId){
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->config = $config;
 		$this->logger = $logger;
+		$this->userManager = $userManager;
 	}
 
 	/**
@@ -54,8 +56,7 @@ class DiscourseController extends Controller {
 
 		$nonce = $ssoHelper->getNonce($payload);
 
-		$userManager = $app->getContainer()->query('OCP\IUserManager');
-		$user = $userManager->get($this->userId);
+		$user = $this->userManager->get($this->userId);
 
 		$userId = $this->userId;
 		$userEmail = $user->getEMailAddress();
