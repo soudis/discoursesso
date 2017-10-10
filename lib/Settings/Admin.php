@@ -20,11 +20,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-namespace OCA\NextcloudAnnouncements\Settings;
+namespace OCA\DiscourseSSO\Settings;
+
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IConfig;
 use OCP\IL10N;
 use OCP\Settings\ISettings;
+
 class Admin implements ISettings {
 	/** @var string */
 	protected $appName;
