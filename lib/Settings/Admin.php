@@ -44,8 +44,8 @@ class Admin implements ISettings {
 	 * @return TemplateResponse
 	 */
 	public function getForm() {
-		$clientsecret = $this->config->getAppValue($this->appName, 'discoursesso_clientsecret', '');
-		$clienturl = $this->config->getAppValue($this->appName, 'discoursesso_clienturl', '');
+		$clientsecret = $this->config->getAppValue($this->appName, 'clientsecret', '');
+		$clienturl = $this->config->getAppValue($this->appName, 'clienturl', '');
 
 		return new TemplateResponse($this->appName, 'admin', [
 			'clientsecret' => $clientsecret,

@@ -2,7 +2,7 @@
 <info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>discoursesso</id>
-    <name>Discourse S S O</name>
+    <name>Discourse SSO</name>
     <summary>Enable Discourse to authenticate via Nextcloud</summary>
     <description><![CDATA[Discourse has it&#39;s own SSO protocol, that needs an specially designed endpoint to authenticate with. This app implements this endpoint and allows Discourse instances to authenticate against an Nextcloud instance.
 

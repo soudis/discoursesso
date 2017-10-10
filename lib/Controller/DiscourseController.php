@@ -7,15 +7,19 @@ use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Controller;
 use OCP\IUserManager;
+use OCP\ILogger;
+use Cviebrock\DiscoursePHP\SSOHelper;
 
 class DiscourseController extends Controller {
 	private $userId;
 	private $config;
+	private $logger;
 
-	public function __construct($AppName, IConfig $config, IRequest $request, $UserId){
+	public function __construct($AppName, IRequest $request, IConfig $config, ILogger $logger, $UserId){
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->config = $config;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -28,26 +32,27 @@ class DiscourseController extends Controller {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
-	public function sso() {
-		$sso = new Cviebrock\DiscoursePHP\SSOHelper();
+	public function sso($sso, $sig) {
+		$ssoHelper = new SSOHelper();
 
 		// this should be the same in your code and in your Discourse settings:
-		$secret = $this->config->getAppValue($this->appName, 'discoursesso_clientsecret', '');
-		$sso->setSecret( $secret );
+		$secret = $this->config->getAppValue($this->appName, 'clientsecret', '');
+		$this->logger->error('secret: '.$secret, array('app' => 'discoursesso'));
+		$ssoHelper->setSecret( $secret );
 
 		// load the payload passed in by Discourse
-		$payload = $_GET['sso'];
-		$signature = $_GET['sig'];
+		$payload = $sso;
+		$signature = $sig;
 
 		// validate the payload
-		if (!($sso->validatePayload($payload,$signature))) {
+		if (!($ssoHelper->validatePayload($payload,$signature))) {
 		    // invaild, deny
 		    header("HTTP/1.1 403 Forbidden");
-		    echo("Bad SSO request");
+		    echo("Bad SSO request, appName: " .$this->appName." payload: ".$sso.", signature:".$sig." secret: ".$secret);
 		    die();
 		}
 
-		$nonce = $sso->getNonce($payload);
+		$nonce = $ssoHelper->getNonce($payload);
 
 		$userManager = $app->getContainer()->query('OCP\IUserManager');
 		$user = $userManager->get($this->userId);
@@ -64,8 +69,9 @@ class DiscourseController extends Controller {
 		// );
 
 		// build query string and redirect back to the Discourse site
-		$query = $sso->getSignInString($nonce, $userId, $userEmail, NULL);
-		$url = $this->config->getAppValue($this->appName, 'discoursesso_clienturl', '');
+		$query = $ssoHelper->getSignInString($nonce, $userId, $userEmail, NULL);
+		$url = $this->config->getAppValue($this->appName, 'clienturl', '');
+		$this->logger->error('url: '.$url, array('app' => 'discoursesso'));
 
 		return new RedirectResponse($url . '?' . $query);
 	}

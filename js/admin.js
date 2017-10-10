@@ -26,12 +26,12 @@ $(document).ready(function() {
 
 
 	$secret.change(function(event) {
-		var value = event.val;
-		OC.AppConfig.setValue('discoursesso', 'discoursesso_clientsecret', value);
+		var value = event.target.value;
+		OC.AppConfig.setValue('discoursesso', 'clientsecret', value);
 	});
 
 	$url.change(function(event) {
-		var value = event.val;		
-		OC.AppConfig.setValue('discoursesso', 'discoursesso_clienturl', value);
+		var value = event.target.value;		
+		OC.AppConfig.setValue('discoursesso', 'clienturl', value);
 	});
 });
