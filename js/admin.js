@@ -28,10 +28,12 @@ $(document).ready(function() {
 	$secret.change(function(event) {
 		var value = event.target.value;
 		OC.AppConfig.setValue('discoursesso', 'clientsecret', value);
+		$secret.next("img").show(0).delay(500).fadeOut('slow');
 	});
 
 	$url.change(function(event) {
 		var value = event.target.value;		
 		OC.AppConfig.setValue('discoursesso', 'clienturl', value);
+		$url.next("img").show(0).delay(500).fadeout('slow');
 	});
 });
