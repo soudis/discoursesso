@@ -75,7 +75,7 @@ class DiscourseController extends Controller {
 		$url = $this->config->getAppValue($this->appName, 'clienturl', '');
 		$this->logger->error('url: '.$url, array('app' => 'discoursesso'));
 
-		return new RedirectResponse($url . '?' . $query);
+		return new RedirectResponse($url . '/session/sso_login?' . $query);
 	}
 
 }
