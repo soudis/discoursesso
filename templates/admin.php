@@ -30,17 +30,16 @@ script('discoursesso', 'admin');
 <div id="discoursesso" class="section">
 	<h2 class="inlineblock"><?php p($l->t('Discourse SSO')); ?></h2>
 	<p class="settings-hint"><?php p($l->t('Configure SSO information for Discourse')); ?></p>
-
 	<p>
 		<label>
-			<span>Client Secret</span>
-			<input type="text" name="discoursesso_clientsecret" class="discoursesso_clientsecret" value="<?php p($_['clientsecret']) ?>" style="width: 320px;" />
+			<label for="discoursesso_clientsecret">Client Secret</label>
+			<input type="text" name="discoursesso_clientsecret" class="discoursesso_clientsecret" placeholder="I_love_sso_a_lot" value="<?php p($_['clientsecret']) ?>" style="width: 400px;" />
 		</label>
 	</p>
 	<p>
 		<label>
-			<span>Discourse URL</span>			
-			<input type="url" name="discoursesso_clienturl" class="discoursesso_clienturl" value="<?php p($_['clienturl']) ?>" style="width: 320px;" />
+			<label for="discoursesso_clienturl">Discourse URL</label>
+			<input type="url" name="discoursesso_clienturl" class="discoursesso_clienturl" placeholder="https://discourse.yoursite.org/index.php/apps/discoursesso" value="<?php p($_['clienturl']) ?>" style="width: 400px;" />
 		</label>
 	</p>
 </div>
