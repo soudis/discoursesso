@@ -34,6 +34,6 @@ $(document).ready(function() {
 	$url.change(function(event) {
 		var value = event.target.value;		
 		OC.AppConfig.setValue('discoursesso', 'clienturl', value);
-		$url.next("img").show(0).delay(500).fadeout('slow');
+		$url.next("img").show(0).delay(500).fadeOut('slow');
 	});
 });
