@@ -34,13 +34,13 @@ script('discoursesso', 'admin');
 	<p>
 		<label>
 			<span>Client Secret</span>
-			<input type="text" name="discoursesso_clientsecret" class="discoursesso_clientsecret" value="<?php p($_['discoursesso_clientsecret']) ?>" style="width: 320px;" />
+			<input type="text" name="discoursesso_clientsecret" class="discoursesso_clientsecret" value="<?php p($_['clientsecret']) ?>" style="width: 320px;" />
 		</label>
 	</p>
 	<p>
 		<label>
 			<span>Discourse URL</span>			
-			<input type="url" name="discoursesso_clienturl" class="discoursesso_clienturl" value="<?php p($_['discoursesso_clienturl']) ?>" style="width: 320px;" />
+			<input type="url" name="discoursesso_clienturl" class="discoursesso_clienturl" value="<?php p($_['clienturl']) ?>" style="width: 320px;" />
 		</label>
 	</p>
 </div>
