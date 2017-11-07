@@ -9,6 +9,7 @@ use OCP\AppFramework\Http\RedirectResponse;
 use OCP\AppFramework\Controller;
 use OCP\IUserManager;
 use OCP\ILogger;
+use OCP\IUserSession;
 use Cviebrock\DiscoursePHP\SSOHelper;
 
 class DiscourseController extends Controller {
@@ -16,13 +17,15 @@ class DiscourseController extends Controller {
 	private $config;
 	private $logger;
 	private $userManager;
+	private $userSession;
 
-	public function __construct($AppName, IRequest $request, IConfig $config, IUserManager $userManager, ILogger $logger, $UserId){
+	public function __construct($AppName, IRequest $request, IConfig $config, IUserManager $userManager, ILogger $logger, IUserSession $userSession, $UserId){
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->config = $config;
 		$this->logger = $logger;
 		$this->userManager = $userManager;
+		$this->userSession = $userSession;
 	}
 
 	/**
@@ -76,6 +79,22 @@ class DiscourseController extends Controller {
 		$this->logger->error('url: '.$url, array('app' => 'discoursesso'));
 
 		return new RedirectResponse($url . '/session/sso_login?' . $query);
+	}
+
+	/**
+	 * CAUTION: the @Stuff turns off security checks; for this page no admin is
+	 *          required and no CSRF check. If you don't know what CSRF is, read
+	 *          it up in the docs or you might create a security hole. This is
+	 *          basically the only required method to add this exemption, don't
+	 *          add it to any other method if you don't exactly know what it does
+	 *
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function logout() {
+		$this->userSession->logout();
+		$url = $this->config->getAppValue($this->appName, 'clienturl', '');
+		return new RedirectResponse($url);
 	}
 
 }

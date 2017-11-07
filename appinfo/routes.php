@@ -9,6 +9,7 @@
  */
 return [
     'routes' => [
-	   ['name' => 'discourse#sso', 'url' => '/', 'verb' => 'GET']
+	   ['name' => 'discourse#sso', 'url' => '/', 'verb' => 'GET'],
+	   ['name' => 'discourse#logout', 'url' => '/logout', 'verb' => 'GET']
     ]
 ];
