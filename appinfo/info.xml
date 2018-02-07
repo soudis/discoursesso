@@ -14,6 +14,7 @@ Discourse can then be used as an external app inside Nextcloud.]]></description>
     <category>auth</category>
     <bugs>https://github.com/soudis/discoursesso/issues</bugs>
     <repository type="git">https://github.com/soudis/discoursesso.git</repository>
+      <screenshot small-thumbnail="https://raw.githubusercontent.com/soudis/discoursesso/master/appinfo/discoursesso_sm.png">https://raw.githubusercontent.com/soudis/discoursesso/master/appinfo/discoursesso.png</screenshot>
     <dependencies>
         <nextcloud min-version="12" max-version="13"/>
     </dependencies>
