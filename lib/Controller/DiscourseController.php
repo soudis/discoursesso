@@ -8,6 +8,7 @@ use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\RedirectResponse;
 use OCP\AppFramework\Controller;
 use OCP\IUserManager;
+use OCP\IGroupManager;
 use OCP\ILogger;
 use OCP\IUserSession;
 use Cviebrock\DiscoursePHP\SSOHelper;
@@ -18,14 +19,16 @@ class DiscourseController extends Controller {
 	private $logger;
 	private $userManager;
 	private $userSession;
+	private $groupManager;
 
-	public function __construct($AppName, IRequest $request, IConfig $config, IUserManager $userManager, ILogger $logger, IUserSession $userSession, $UserId){
+	public function __construct($AppName, IRequest $request, IConfig $config, IUserManager $userManager, IGroupManager $groupManager, ILogger $logger, IUserSession $userSession, $UserId){
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->config = $config;
 		$this->logger = $logger;
 		$this->userManager = $userManager;
 		$this->userSession = $userSession;
+		$this->groupManager = $groupManager;
 	}
 
 	/**
@@ -61,9 +64,20 @@ class DiscourseController extends Controller {
 		$nonce = $ssoHelper->getNonce($payload);
 
 		$user = $this->userManager->get($this->userId);
+		$groups = $this->groupManager->getUserGroups($user);
+		$add_groups = '';
+		foreach ($groups as $group) {
+			$add_groups = $add_groups.$group.getGID().',';
+		}
 
 		$userId = $this->userId;
 		$userEmail = $user->getEMailAddress();
+
+		$extraParameters = array(
+		     'username' => $userId,
+		     'name'     => $user->getDisplayName(),
+		     'add_groups' => $add_groups
+		);
 
 		// Optional - if you don't set these, Discourse will generate suggestions
 		// based on the email address
