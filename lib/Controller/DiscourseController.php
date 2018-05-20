@@ -67,7 +67,7 @@ class DiscourseController extends Controller {
 		$groups = $this->groupManager->getUserGroups($user);
 		$add_groups = '';
 		foreach ($groups as $group) {
-			$add_groups = $add_groups.$group.getGID().',';
+			$add_groups = $add_groups.$group->getGID().',';
 		}
 
 		$userId = $this->userId;
