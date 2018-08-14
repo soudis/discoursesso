@@ -64,28 +64,28 @@ class DiscourseController extends Controller {
 		$nonce = $ssoHelper->getNonce($payload);
 
 		$user = $this->userManager->get($this->userId);
-		$groups = $this->groupManager->getUserGroups($user);
-		$add_groups = '';
-		foreach ($groups as $group) {
-			$add_groups = $add_groups.$group->getGID().',';
-		}
+		
+                $add_groups = '';
+                $remove_groups = '';
+                $allGroups = $this->groupManager->search(null, null, null);
+                foreach($allGroups as $group) {
+                        if (!($this->groupManager->isInGroup($this->userId, $group->getGID()))) {
+                          $remove_groups = $remove_groups.$group->getGID().',';
+                        } else {
+                          $add_groups = $add_groups.$group->getGID().',';
+                        }
+                }
 
-		$userId = $this->userId;
-		$userEmail = $user->getEMailAddress();
+                $userId = $this->userId;
+                $userEmail = $user->getEMailAddress();
 
-		$extraParameters = array(
-		     'username' => $userId,
-		     'name'     => $user->getDisplayName(),
-		     'add_groups' => $add_groups
-		);
-
-		// Optional - if you don't set these, Discourse will generate suggestions
-		// based on the email address
-
-		// $extraParameters = array(
-		//     'username' => $userUsername,
-		//     'name'     => $userFullName
-		// );
+                $extraParameters = array(
+                     'username' => $userId,
+                     'name'     => $user->getDisplayName(),
+                     'add_groups' => $add_groups,
+                     'remove_groups' => $remove_groups,
+                     'groups' => $add_groups
+                );
 
 		// build query string and redirect back to the Discourse site
 		$query = $ssoHelper->getSignInString($nonce, $userId, $userEmail, $extraParameters);
