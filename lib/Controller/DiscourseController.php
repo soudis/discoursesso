@@ -33,7 +33,7 @@ class DiscourseController extends Controller {
 
 	private function replaceWhitespaces($string) {
 		$replaceString = $this->config->getAppValue($this->appName, 'replaceWhitespaces', '');
-		if ($replaceString != '') {
+		if ($replaceString !== '') {
 			return preg_replace('/\s+/', $replaceString, $string);
 		} else {
 			return $string;
