@@ -89,15 +89,15 @@ class DiscourseController extends Controller {
                 $userEmail = $user->getEMailAddress();
 
                 $extraParameters = array(
-                     'username' => replaceWhitespaces($userId),
+                     'username' => $this->replaceWhitespaces($userId),
                      'name'     => $user->getDisplayName(),
-                     'add_groups' => replaceWhitespaces($add_groups),
-                     'remove_groups' => replaceWhitespaces($remove_groups),
-                     'groups' => replaceWhitespaces($add_groups)
+                     'add_groups' => $this->replaceWhitespaces($add_groups),
+                     'remove_groups' => $this->replaceWhitespaces($remove_groups),
+                     'groups' => $this->replaceWhitespaces($add_groups)
                 );
 
 		// build query string and redirect back to the Discourse site
-		$query = $ssoHelper->getSignInString($nonce, replaceWhitespaces($userId), $userEmail, $extraParameters);
+		$query = $ssoHelper->getSignInString($nonce, $this->replaceWhitespaces($userId), $userEmail, $extraParameters);
 		$url = $this->config->getAppValue($this->appName, 'clienturl', '');
 		$this->logger->error('url: '.$url, array('app' => 'discoursesso'));
 
