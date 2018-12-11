@@ -31,6 +31,15 @@ class DiscourseController extends Controller {
 		$this->groupManager = $groupManager;
 	}
 
+	private function replaceWhitespaces($string) {
+		$replaceString = $this->config->getAppValue($this->appName, 'replaceWhitespaces', '');
+		if ($replaceString != '') {
+			return preg_replace('/\s+/', $replaceString, $string);
+		} else {
+			return $string;
+		}
+	}
+
 	/**
 	 * CAUTION: the @Stuff turns off security checks; for this page no admin is
 	 *          required and no CSRF check. If you don't know what CSRF is, read
@@ -80,15 +89,15 @@ class DiscourseController extends Controller {
                 $userEmail = $user->getEMailAddress();
 
                 $extraParameters = array(
-                     'username' => $userId,
+                     'username' => replaceWhitespaces($userId),
                      'name'     => $user->getDisplayName(),
-                     'add_groups' => $add_groups,
-                     'remove_groups' => $remove_groups,
-                     'groups' => $add_groups
+                     'add_groups' => replaceWhitespaces($add_groups),
+                     'remove_groups' => replaceWhitespaces($remove_groups),
+                     'groups' => replaceWhitespaces($add_groups)
                 );
 
 		// build query string and redirect back to the Discourse site
-		$query = $ssoHelper->getSignInString($nonce, $userId, $userEmail, $extraParameters);
+		$query = $ssoHelper->getSignInString($nonce, replaceWhitespaces($userId), $userEmail, $extraParameters);
 		$url = $this->config->getAppValue($this->appName, 'clienturl', '');
 		$this->logger->error('url: '.$url, array('app' => 'discoursesso'));
 

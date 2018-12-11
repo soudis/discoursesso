@@ -46,10 +46,12 @@ class Admin implements ISettings {
 	public function getForm() {
 		$clientsecret = $this->config->getAppValue($this->appName, 'clientsecret', '');
 		$clienturl = $this->config->getAppValue($this->appName, 'clienturl', '');
+		$replace_whitespaces = $this->config->getAppValue($this->appName, 'replace_whitespaces', '');
 
 		return new TemplateResponse($this->appName, 'admin', [
 			'clientsecret' => $clientsecret,
-			'clienturl' => $clienturl
+			'clienturl' => $clienturl,
+			'replace_whitespaces' => $replace_whitespaces
 		], 'blank');
 	}
 	/**

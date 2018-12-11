@@ -23,6 +23,7 @@
 $(document).ready(function() {
 	var $secret = $('#discoursesso').find('.discoursesso_clientsecret');
 	var $url = $('#discoursesso').find('.discoursesso_clienturl');
+	var $replace_whitespaces = $('#discoursesso').find('.discoursesso_replace_whitespaces');
 
 
 	$secret.change(function(event) {
@@ -36,4 +37,10 @@ $(document).ready(function() {
 		OC.AppConfig.setValue('discoursesso', 'clienturl', value);
 		$url.next("img").show(0).delay(500).fadeOut('slow');
 	});
+
+	$replace_whitespaces.change(function(event) {
+		var value = event.target.value;		
+		OC.AppConfig.setValue('discoursesso', 'replace_whitespaces', value);
+		$replace_whitespaces.next("img").show(0).delay(500).fadeOut('slow');
+	});	
 });
