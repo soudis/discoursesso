@@ -115,9 +115,8 @@ class DiscourseController extends Controller {
 	 * @NoCSRFRequired
 	 */
 	public function logout() {
-		$this->userSession->logout();
-		$url = $this->config->getAppValue($this->appName, 'clienturl', '');
-		return new RedirectResponse($url);
+		$url = \OC_USER::getLogoutUrl($this->urlGenerator);
+		return new RedirectResponse($url . '&returnTo='.$this->config->getAppValue($this->appName, 'clienturl', ''));
 	}
 
 }
