@@ -55,7 +55,6 @@ class DiscourseController extends Controller {
 
 		// this should be the same in your code and in your Discourse settings:
 		$secret = $this->config->getAppValue($this->appName, 'clientsecret', '');
-		$this->logger->error('secret: '.$secret, array('app' => 'discoursesso'));
 		$ssoHelper->setSecret( $secret );
 
 		// load the payload passed in by Discourse
@@ -99,7 +98,6 @@ class DiscourseController extends Controller {
 		// build query string and redirect back to the Discourse site
 		$query = $ssoHelper->getSignInString($nonce, $this->replaceWhitespaces($userId), $userEmail, $extraParameters);
 		$url = $this->config->getAppValue($this->appName, 'clienturl', '');
-		$this->logger->error('url: '.$url, array('app' => 'discoursesso'));
 
 		return new RedirectResponse($url . '/session/sso_login?' . $query);
 	}
