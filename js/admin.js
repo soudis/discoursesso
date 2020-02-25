@@ -48,6 +48,6 @@ $(document).ready(function() {
 	$scan_for_title.change(function(event) {
 		var value = event.target.value;		
 		OC.AppConfig.setValue('discoursesso', 'scan_for_title', value);
-		$replace_whitespaces.next("img").show(0).delay(500).fadeOut('slow');
+		$scan_for_title.next("img").show(0).delay(500).fadeOut('slow');
 	});		
 });
