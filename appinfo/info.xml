@@ -7,7 +7,7 @@
     <description><![CDATA[Discourse has it&#39;s own SSO protocol, that needs an specially designed endpoint to authenticate with. This app implements this endpoint and allows Discourse instances to authenticate against an Nextcloud instance.
 
 Discourse can then be used as an external app inside Nextcloud.]]></description>
-    <version>0.9.20</version>
+    <version>0.9.21</version>
     <licence>agpl</licence>
     <author mail="florian.humer@gmail.com" homepage="https://habidat.org">Florian Humer</author>
     <namespace>DiscourseSSO</namespace>
@@ -16,7 +16,7 @@ Discourse can then be used as an external app inside Nextcloud.]]></description>
     <repository type="git">https://github.com/soudis/discoursesso.git</repository>
       <screenshot small-thumbnail="https://raw.githubusercontent.com/soudis/discoursesso/master/appinfo/discoursesso_sm.png">https://raw.githubusercontent.com/soudis/discoursesso/master/appinfo/discoursesso.png</screenshot>
     <dependencies>
-        <nextcloud min-version="12" max-version="17"/>
+        <nextcloud min-version="12" max-version="18"/>
     </dependencies>
     <settings>
         <admin>OCA\DiscourseSSO\Settings\Admin</admin>

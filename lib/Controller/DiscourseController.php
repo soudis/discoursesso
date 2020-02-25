@@ -36,13 +36,44 @@ class DiscourseController extends Controller {
 
 
 	private function replaceWhitespaces($string) {
-		$replaceString = $this->config->getAppValue($this->appName, 'replaceWhitespaces', '');
+		$replaceString = $this->config->getAppValue($this->appName, 'replace_whitespaces', '');
 		if ($replaceString !== '') {
 			return preg_replace('/\s+/', $replaceString, $string);
 		} else {
 			return $string;
 		}
 	}
+
+	private function removeTitleInDisplayName($name) {
+		$scanString = $this->config->getAppValue($this->appName, 'scan_for_title', '');
+		if ($scanString !== '') {
+			preg_match_all($scanString, $name, $aMatches);
+			$title = end($aMatches[0]);
+			if (!$title) {
+			    return $name;
+			} else {
+			    return trim(str_replace($title, "", $name));
+			}
+		} else {
+			return $name;
+		}		
+	}	
+
+	private function getTitle($name) {
+		$scanString = $this->config->getAppValue($this->appName, 'scan_for_title', '');
+		if ($scanString !== '') {
+			preg_match_all($scanString, $name, $aMatches);
+			$title = end($aMatches[1]);
+			if (!$title) {
+			    return '';
+			} else {
+			    return $title;
+			}
+		} else {
+			return '';
+		}
+	}	
+
 
 	/**
 	 * CAUTION: the @Stuff turns off security checks; for this page no admin is
@@ -90,10 +121,12 @@ class DiscourseController extends Controller {
 
                 $userId = $this->userId;
                 $userEmail = $user->getEMailAddress();
+                $displayName = $user->getDisplayName();
 
                 $extraParameters = array(
                      'username' => $this->replaceWhitespaces($userId),
-                     'name'     => $user->getDisplayName(),
+                     'name'     => $this->removeTitleInDisplayName($displayName),
+                     'title'    => $this->getTitle($displayName),
                      'add_groups' => $this->replaceWhitespaces($add_groups),
                      'remove_groups' => $this->replaceWhitespaces($remove_groups),
                      'groups' => $this->replaceWhitespaces($add_groups)

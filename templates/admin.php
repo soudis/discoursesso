@@ -52,4 +52,11 @@ style('discoursesso', 'admin');
 			<img class="svg action saved-info hidden" src="/core/img/actions/checkmark.svg" title="Configuration saved">
 		</label>
 	</p>	
+	<p>
+		<label>
+			<label for="discoursesso_scan_for_title" width="350" align="right">Scan for title in name (RegExp)</label>
+			<input type="text" name="discoursesso_scan_for_title" class="discoursesso_scan_for_title" placeholder="e.g. text in paranthesis: '/\(([^\)]*)\)/')" value="<?php p($_['scan_for_title']) ?>" style="width: 300px;" />
+			<img class="svg action saved-info hidden" src="/core/img/actions/checkmark.svg" title="Configuration saved">
+		</label>
+	</p>		
 </div>

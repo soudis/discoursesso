@@ -24,6 +24,7 @@ $(document).ready(function() {
 	var $secret = $('#discoursesso').find('.discoursesso_clientsecret');
 	var $url = $('#discoursesso').find('.discoursesso_clienturl');
 	var $replace_whitespaces = $('#discoursesso').find('.discoursesso_replace_whitespaces');
+	var $scan_for_title = $('#discoursesso').find('.discoursesso_scan_for_title');
 
 
 	$secret.change(function(event) {
@@ -43,4 +44,10 @@ $(document).ready(function() {
 		OC.AppConfig.setValue('discoursesso', 'replace_whitespaces', value);
 		$replace_whitespaces.next("img").show(0).delay(500).fadeOut('slow');
 	});	
+
+	$scan_for_title.change(function(event) {
+		var value = event.target.value;		
+		OC.AppConfig.setValue('discoursesso', 'scan_for_title', value);
+		$replace_whitespaces.next("img").show(0).delay(500).fadeOut('slow');
+	});		
 });
