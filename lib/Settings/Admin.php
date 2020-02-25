@@ -47,11 +47,13 @@ class Admin implements ISettings {
 		$clientsecret = $this->config->getAppValue($this->appName, 'clientsecret', '');
 		$clienturl = $this->config->getAppValue($this->appName, 'clienturl', '');
 		$replace_whitespaces = $this->config->getAppValue($this->appName, 'replace_whitespaces', '');
+		$scan_for_title = $this->config->getAppValue($this->appName, 'scan_for_title', '');
 
 		return new TemplateResponse($this->appName, 'admin', [
 			'clientsecret' => $clientsecret,
 			'clienturl' => $clienturl,
-			'replace_whitespaces' => $replace_whitespaces
+			'replace_whitespaces' => $replace_whitespaces,
+			'scan_for_title' => $scan_for_title
 		], 'blank');
 	}
 	/**
