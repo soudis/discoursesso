@@ -1,27 +1,4 @@
 <?php
-/**
- * @copyright Copyright (c) 2016, Joas Schilling <coding@schilljs.com>
- *
- * @author Joas Schilling <coding@schilljs.com>
- *
- * @license GNU AGPL version 3 or any later version
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
-
 script('discoursesso', 'admin');
 style('discoursesso', 'admin');
 
@@ -54,8 +31,8 @@ style('discoursesso', 'admin');
 	</p>	
 	<p>
 		<label>
-			<label for="discoursesso_scan_for_title" width="400" align="right">Scan for title in name (RegExp)</label>
-			<input type="text" name="discoursesso_scan_for_title" class="discoursesso_scan_for_title" placeholder="e.g. text in paranthesis: '/\(([^\)]*)\)/')" value="<?php p($_['scan_for_title']) ?>" style="width: 300px;" />
+			<label for="discoursesso_scan_for_title" width="400" align="right">Extract title</label>
+			<input type="text" name="discoursesso_scan_for_title" class="discoursesso_scan_for_title" placeholder="Extract title from display name (RegExp), e.g.: '/\(([^\)]*)\)/')" value="<?php p($_['scan_for_title']) ?>" style="width: 300px;" />
 			<img class="svg action saved-info hidden" src="/core/img/actions/checkmark.svg" title="Configuration saved">
 		</label>
 	</p>		
