@@ -35,6 +35,22 @@ If your nextcloud display name would be "Alex (Admin)", your Discourse user name
 
 ## Known Issues
 
+### SECURITY ISSUE! Duplicate E-Mailadresses in Nextcloud user base
+
+There is a security vulnerability if you allow for multiple user accounts with the same e-mail address in nextcloud. The reason is, that the discourse user matching algorithm works like this:
+
+1) if a user with the given user id is found it matches
+2) if no user with the given id is found it matches by e-mail address
+
+This can lead to the following scenario:
+
+1) User "alexandra" with e-mail address "alex@example.com" logs on to discourse: discourse does not find an acount for user name "alexandra" or "alex@example.com" a new user account is created
+2) User "alexander" with e-mail address "alex@example.com" logs on to discourse: discourse does not find an account for user id "alexander", but it finds the account "alexandra" by e-mail address and logs the user on to this account
+
+User "alexander" highjacked user account "alexandra" on discourse!
+
+Therefore make sure there is no way to create an account in Nextcloud with an existing e-mail address and do not use this plugin together with local discourse accounts!
+
 ### Issue with URL decode in Nextcloud 18 and below
 
 There is a bug in nextcloud versions 18 and below that prevents this app from working, please see https://github.com/nextcloud/server/issues/6822
