@@ -110,7 +110,7 @@ class DiscourseController extends Controller {
 		
                 $add_groups = '';
                 $remove_groups = '';
-                $allGroups = $this->groupManager->search(null, null, null);
+                $allGroups = $this->groupManager->search('', null, null);
                 foreach($allGroups as $group) {
                         if (!($this->groupManager->isInGroup($this->userId, $group->getGID()))) {
                           $remove_groups = $remove_groups.$group->getGID().',';
