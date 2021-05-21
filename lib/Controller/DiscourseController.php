@@ -64,14 +64,16 @@ class DiscourseController extends Controller {
 	    $url = rtrim($this->config->getAppValue($this->appName, 'avatar_url', ''), '/');
 	    $header = $this->config->getAppValue($this->appName, 'avatar_token', '');
 
-        // add trailing slash
-	    $url .= '/';
+	    if ($url !== '') {
+            // add trailing slash
+            $url .= '/';
 
-        if ($header !== '') {
-        	return $url.$name."?".$header;
-        } else {
-        	return $url.$name;
-        }
+            if ($header !== '') {
+               	return $url.$name."?".$header;
+            } else {
+                return $url.$name;
+            }
+	    }
 	}
 
 	private function getTitle($name) {
