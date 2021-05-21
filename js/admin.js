@@ -74,6 +74,6 @@ $(document).ready(function() {
 			value = "false"
 		}
 		OC.AppConfig.setValue('discoursesso', 'force_update', value);
-		$force_update.next("img").show(0).delay(500).fadeOut('slow');
+		$force_update.next().next("img").show(0).delay(500).fadeOut('slow');
 	});
 });
