@@ -57,7 +57,24 @@ class DiscourseController extends Controller {
 		} else {
 			return $name;
 		}		
-	}	
+	}
+
+	private function getAvatarUrl($name) {
+	    // strip trailing slash if found
+	    $url = rtrim($this->config->getAppValue($this->appName, 'avatar_url', ''), '/');
+	    $header = $this->config->getAppValue($this->appName, 'avatar_token', '');
+
+	    if ($url !== '') {
+            // add trailing slash
+            $url .= '/';
+
+            if ($header !== '') {
+               	return $url.$name."?".$header;
+            } else {
+                return $url.$name;
+            }
+	    }
+	}
 
 	private function getTitle($name) {
 		$scanString = $this->config->getAppValue($this->appName, 'scan_for_title', '');
@@ -72,7 +89,7 @@ class DiscourseController extends Controller {
 		} else {
 			return '';
 		}
-	}	
+	}
 
 
 	/**
@@ -107,7 +124,7 @@ class DiscourseController extends Controller {
 		$nonce = $ssoHelper->getNonce($payload);
 
 		$user = $this->userManager->get($this->userId);
-		
+
                 $add_groups = '';
                 $remove_groups = '';
                 $allGroups = $this->groupManager->search('', null, null);
@@ -129,7 +146,9 @@ class DiscourseController extends Controller {
                      'title'    => $this->getTitle($displayName),
                      'add_groups' => $this->replaceWhitespaces($add_groups),
                      'remove_groups' => $this->replaceWhitespaces($remove_groups),
-                     'groups' => $this->replaceWhitespaces($add_groups)
+                     'groups' => $this->replaceWhitespaces($add_groups),
+                     'avatar_url' => $this->getAvatarUrl($this->replaceWhitespaces($userId)),
+                     'avatar_force_update' => $this->config->getAppValue($this->appName, 'force_update', '')
                 );
 
 		// build query string and redirect back to the Discourse site

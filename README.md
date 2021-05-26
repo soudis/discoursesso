@@ -1,6 +1,9 @@
 # Discourse SSO
 
-This app is designed to allow Discourse instances (discourse.org) to authenticate via a nextcloud instance. 
+This app is designed to allow Discourse instances (discourse.org) to authenticate via a nextcloud instance.
+
+Supports avatar_url for endpoints in the form {url}/{username}  
+Optional: Add Params for the endpoint (e.g. ?authtoken=xyz&v=3)
 
 ## Installation
 
@@ -11,7 +14,7 @@ Place this app in **nextcloud/apps/**
 The app can be built by using the provided Makefile by running:
 
     make
-    
+
 ## Configuration
 
 * To configure Discourse to use SSO please see https://meta.discourse.org/t/official-single-sign-on-for-discourse-sso/13045
@@ -72,3 +75,4 @@ $location = $this->urlGenerator->getAbsoluteURL($redirectUrl);
 If you want to display discourse within the nextcloud site with the external sites plugin (https://apps.nextcloud.com/apps/external) you would need to set it to open in a separate tab. 
 
 Workaround: There is an outdated Discourse plugin to change this, but it may not work with modern browsers: https://github.com/TheBunyip/discourse-allow-same-origin. Feel free to update it and let me know.
+
