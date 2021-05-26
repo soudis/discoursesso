@@ -5,7 +5,7 @@
     <name>Discourse SSO</name>
     <summary>Enable Discourse to authenticate via Nextcloud</summary>
     <description><![CDATA[Discourse has it&#39;s own SSO protocol, that needs an specially designed endpoint to authenticate with. This app implements this endpoint and allows Discourse instances to authenticate against an Nextcloud instance. Please look at the admin documentation for security issues!]]></description>
-    <version>1.0.21</version>
+    <version>1.21.1</version>
     <licence>agpl</licence>
     <author mail="florian.humer@gmail.com" homepage="https://github.com/soudis/discoursesso">Florian Humer</author>
     <documentation>
