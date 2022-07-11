@@ -36,6 +36,18 @@ For example: /\\(([^\\)]\*)\\)/
 
 If your nextcloud display name would be "Alex (Admin)", your Discourse user name would be "Alex" and your Discourse title would be "Admin".
 
+### Avatar URL / Avatar URL Params
+
+Define avatar URL and URL parameters. This will be sent to discourse in the SSO payload in the "avatar_url" field.
+
+### Avatar Force Update
+
+Set the "avatar_force_update" field in the SSO payload that is sent to discourse.
+
+### Exclude User Groups
+
+Exclude the user's group memberships from the SSO payload. This can be necessary if there are issues with reverse proxy header length.
+
 ## Known Issues
 
 ### SECURITY ISSUE! Duplicate E-Mailadresses in Nextcloud user base

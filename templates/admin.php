@@ -9,53 +9,59 @@ style('discoursesso', 'admin');
 	<h2 class="inlineblock"><?php p($l->t('Discourse SSO')); ?></h2>
 	<a target="_blank" rel="noreferrer" class="icon-info" title="<?php p($l->t('Open documentation'));?>" href="https://github.com/soudis/discoursesso"></a>
 	<p class="settings-hint"><?php p($l->t('Configure SSO information for Discourse')); ?></p>
-	<p>
+	<div id="discoursesso_settings_status">
+		<span id="discoursesso_settings_msg" class="msg success" style="display: none;"><?php p($l->t('Saved')); ?></span>
+	</div>
+	<div>
 		<label>
-			<label for="discoursesso_clientsecret" width="400" align="right">Client Secret</label>
-			<input type="text" name="discoursesso_clientsecret" class="discoursesso_clientsecret" placeholder="I_love_sso_a_lot" value="<?php p($_['clientsecret']) ?>" style="width: 300px;" />
-			<img class="svg action saved-info hidden" src="/core/img/actions/checkmark.svg" title="Configuration saved">
+			<span>Client Secret</span>
+			<input type="text" name="discoursesso_clientsecret" class="discoursesso_clientsecret" placeholder="I_love_sso_a_lot" value="<?php p($_['clientsecret']) ?>"/>
 		</label>
-	</p>
-	<p>
+	</div>
+	<div>
 		<label>
-			<label for="discoursesso_clienturl" width="400" align="right">Discourse URL</label>
-			<input type="url" name="discoursesso_clienturl" class="discoursesso_clienturl" placeholder="https://discourse.yoursite.org" value="<?php p($_['clienturl']) ?>" style="width: 300px;" />
-			<img class="svg action saved-info hidden" src="/core/img/actions/checkmark.svg" title="Configuration saved">
+			<span>Discourse URL</span>
+			<input type="url" name="discoursesso_clienturl" class="discoursesso_clienturl" placeholder="https://discourse.yoursite.org" value="<?php p($_['clienturl']) ?>"/>
 		</label>
-	</p>
-	<p>
+	</div>
+	<h3><?php p($l->t('Optional parameters')); ?></h3>
+	<p class="settings-hint"><?php p($l->t('See documentation for further information')); ?></p>
+	<div>
 		<label>
-			<label for="discoursesso_replace_whitespaces" width="400" align="right">Replace Whitespaces</label>
-			<input type="text" name="discoursesso_replace_whitespaces" class="discoursesso_replace_whitespaces" placeholder="for usernames, group IDs (e.g. '_')" value="<?php p($_['replace_whitespaces']) ?>" style="width: 300px;" />
-			<img class="svg action saved-info hidden" src="/core/img/actions/checkmark.svg" title="Configuration saved">
+			<span>Replace Whitespaces</span>
+			<input type="text" name="discoursesso_replace_whitespaces" class="discoursesso_replace_whitespaces" placeholder="for usernames, group IDs (e.g. '_')" value="<?php p($_['replace_whitespaces']) ?>"/>
 		</label>
-	</p>
-	<p>
+	</div>
+	<div>
 		<label>
-			<label for="discoursesso_scan_for_title" width="400" align="right">Extract title</label>
-			<input type="text" name="discoursesso_scan_for_title" class="discoursesso_scan_for_title" placeholder="Extract title from display name (RegExp), e.g.: '/\(([^\)]*)\)/')" value="<?php p($_['scan_for_title']) ?>" style="width: 300px;" />
-			<img class="svg action saved-info hidden" src="/core/img/actions/checkmark.svg" title="Configuration saved">
+			<span>Extract title</span>
+			<input type="text" name="discoursesso_scan_for_title" class="discoursesso_scan_for_title" placeholder="Extract title from display name (RegExp), e.g.: '/\(([^\)]*)\)/')" value="<?php p($_['scan_for_title']) ?>"/>
 		</label>
-	</p>
-	<p>
-    	<label>
-    		<label for="discoursesso_avatar_url" width="400" align="right">Avatar URL</label>
-    		<input type="text" name="discoursesso_avatar_url" class="discoursesso_avatar_url" placeholder="Avatar URL (example.com/avatar)" value="<?php p($_['avatar_url']) ?>" style="width: 300px;" />
-    		<img class="svg action saved-info hidden" src="/core/img/actions/checkmark.svg" title="Configuration saved">
-    	</label>
-    </p>
-    <p>
-        <label>
-        	<label for="discoursesso_avatar_token" width="400" align="right">URL Params (without ?)</label>
-        	<input type="text" name="discoursesso_avatar_token" class="discoursesso_avatar_token" placeholder="URL Params (e.g. token=authtoken&v=1)" value="<?php p($_['avatar_token']) ?>" style="width: 300px;" />
-        	<img class="svg action saved-info hidden" src="/core/img/actions/checkmark.svg" title="Configuration saved">
-        </label>
-    </p>
-    <p>
-        <label>
-            <input type="checkbox" id="discoursesso_force_update" name="discoursesso_force_update" class="checkbox discoursesso_force_update" <?php if ($_['force_update']) { echo "checked"; } ?> />
-            <label for="discoursesso_force_update">Enable Avatar Force Update</label>
-            <img class="svg action saved-info hidden" src="/core/img/actions/checkmark.svg" title="Configuration saved">
-        </label>
-    </p>
+	</div>
+	<div>
+		<label>
+			<span>Avatar URL</span>
+			<input type="text" name="discoursesso_avatar_url" class="discoursesso_avatar_url" placeholder="Avatar URL (example.com/avatar)" value="<?php p($_['avatar_url']) ?>"/>
+		</label>
+	</div>
+	<div>
+		<label>
+			<span>Avatar URL Params</span>
+			<input type="text" name="discoursesso_avatar_token" class="discoursesso_avatar_token" placeholder="URL Params (e.g. token=authtoken&v=1)" value="<?php p($_['avatar_token']) ?>" />
+		</label>
+	</div>
+	<div>
+		<label>
+			<span>Avatar Force Update</span>
+    		<input type="checkbox" id="discoursesso_force_update" name="discoursesso_force_update" class="checkbox discoursesso_force_update" <?php if ($_['force_update'] == "true") { echo "checked"; } ?> />
+    		<label class="checkbox-label" for="discoursesso_force_update"></label>
+		</label>
+	</div>
+	<div>
+		<label>
+			<span>Exclude User Groups</span>
+    		<input type="checkbox" id="discoursesso_exclude_groups" name="discoursesso_exclude_groups" class="checkbox discoursesso_exclude_groups" <?php if ($_['exclude_groups'] == "true") { echo "checked"; } ?> />
+			<label class="checkbox-label" for="discoursesso_exclude_groups"></label>
+		</label>
+	</div>
 </div>

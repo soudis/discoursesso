@@ -51,6 +51,7 @@ class Admin implements ISettings {
 		$avatar_url = $this->config->getAppValue($this->appName, 'avatar_url', '');
 		$avatar_token = $this->config->getAppValue($this->appName, 'avatar_token', '');
 		$force_update = $this->config->getAppValue($this->appName, 'force_update', '');
+		$exclude_groups = $this->config->getAppValue($this->appName, 'exclude_groups', '');
 
 		return new TemplateResponse($this->appName, 'admin', [
 			'clientsecret' => $clientsecret,
@@ -59,7 +60,8 @@ class Admin implements ISettings {
 			'scan_for_title' => $scan_for_title,
 			'avatar_url' => $avatar_url,
 			'avatar_token' => $avatar_token,
-			'force_update' => $force_update
+			'force_update' => $force_update,
+			'exclude_groups' => $exclude_groups,
 		], 'blank');
 	}
 	/**

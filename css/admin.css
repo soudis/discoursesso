@@ -1,5 +1,23 @@
-#discoursesso label {
+#discoursesso input {
+	width:  500px;	
+}
+
+#discoursesso label span {
 	display: inline-block;
-	min-width: 180px;
-	text-align: right;
+	min-width: 175px;
+	padding: 8px 0px;
+	vertical-align: top;
+}
+
+#discoursesso label.checkbox-label {
+	position: relative;
+	top: 8px;
+}
+
+#discoursesso h3 {
+	margin-top:  30px;
+}
+
+#discoursesso_settings_status {
+	height: 26px;
 }

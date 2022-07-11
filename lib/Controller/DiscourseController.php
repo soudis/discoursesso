@@ -124,32 +124,37 @@ class DiscourseController extends Controller {
 		$nonce = $ssoHelper->getNonce($payload);
 
 		$user = $this->userManager->get($this->userId);
+ 
 
-                $add_groups = '';
-                $remove_groups = '';
-                $allGroups = $this->groupManager->search('', null, null);
-                foreach($allGroups as $group) {
-                        if (!($this->groupManager->isInGroup($this->userId, $group->getGID()))) {
-                          $remove_groups = $remove_groups.$group->getGID().',';
-                        } else {
-                          $add_groups = $add_groups.$group->getGID().',';
-                        }
-                }
+        $userId = $this->userId;
+        $userEmail = $user->getEMailAddress();
+        $displayName = $user->getDisplayName();
 
-                $userId = $this->userId;
-                $userEmail = $user->getEMailAddress();
-                $displayName = $user->getDisplayName();
+        $extraParameters = array(
+             'username' => $this->replaceWhitespaces($userId),
+             'name'     => $this->removeTitleInDisplayName($displayName),
+             'title'    => $this->getTitle($displayName),
+             'avatar_url' => $this->getAvatarUrl($this->replaceWhitespaces($userId)),
+             'avatar_force_update' => $this->config->getAppValue($this->appName, 'force_update', '')
+        );
 
-                $extraParameters = array(
-                     'username' => $this->replaceWhitespaces($userId),
-                     'name'     => $this->removeTitleInDisplayName($displayName),
-                     'title'    => $this->getTitle($displayName),
-                     'add_groups' => $this->replaceWhitespaces($add_groups),
-                     'remove_groups' => $this->replaceWhitespaces($remove_groups),
-                     'groups' => $this->replaceWhitespaces($add_groups),
-                     'avatar_url' => $this->getAvatarUrl($this->replaceWhitespaces($userId)),
-                     'avatar_force_update' => $this->config->getAppValue($this->appName, 'force_update', '')
-                );
+		$excludeGroups = $this->config->getAppValue($this->appName, 'exclude_groups', '');
+
+		if ($excludeGroups !== "true") {
+	 		$add_groups = '';
+	        $remove_groups = '';
+	        $allGroups = $this->groupManager->search('', null, null);
+	        foreach($allGroups as $group) {
+	                if (!($this->groupManager->isInGroup($this->userId, $group->getGID()))) {
+	                  $remove_groups = $remove_groups.$group->getGID().',';
+	                } else {
+	                  $add_groups = $add_groups.$group->getGID().',';
+	                }
+	            }
+        	$extraParameters['add_groups'] = $this->replaceWhitespaces($add_groups);
+        	$extraParameters['remove_groups'] = $this->replaceWhitespaces($remove_groups);
+        	$extraParameters['groups'] = $this->replaceWhitespaces($add_groups);
+        }
 
 		// build query string and redirect back to the Discourse site
 		$query = $ssoHelper->getSignInString($nonce, $this->replaceWhitespaces($userId), $userEmail, $extraParameters);

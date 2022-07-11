@@ -21,6 +21,7 @@
  */
 
 $(document).ready(function() {
+	var $msg = $('#discoursesso_settings_msg');
 	var $secret = $('#discoursesso').find('.discoursesso_clientsecret');
 	var $url = $('#discoursesso').find('.discoursesso_clienturl');
 	var $replace_whitespaces = $('#discoursesso').find('.discoursesso_replace_whitespaces');
@@ -28,42 +29,42 @@ $(document).ready(function() {
 	var $avatar_url = $('#discoursesso').find('.discoursesso_avatar_url');
 	var $avatar_token = $('#discoursesso').find('.discoursesso_avatar_token');
 	var $force_update = $('#discoursesso').find('.discoursesso_force_update');
-
+	var $exclude_groups = $('#discoursesso').find('.discoursesso_exclude_groups');
 
 	$secret.change(function(event) {
 		var value = event.target.value;
 		OC.AppConfig.setValue('discoursesso', 'clientsecret', value);
-		$secret.next("img").show(0).delay(500).fadeOut('slow');
+		$msg.show(0).delay(500).fadeOut('slow');
 	});
 
 	$url.change(function(event) {
 		var value = event.target.value;
 		OC.AppConfig.setValue('discoursesso', 'clienturl', value);
-		$url.next("img").show(0).delay(500).fadeOut('slow');
+		$msg.show(0).delay(500).fadeOut('slow');
 	});
 
 	$replace_whitespaces.change(function(event) {
 		var value = event.target.value;
 		OC.AppConfig.setValue('discoursesso', 'replace_whitespaces', value);
-		$replace_whitespaces.next("img").show(0).delay(500).fadeOut('slow');
+		$msg.show(0).delay(500).fadeOut('slow');
 	});
 
 	$scan_for_title.change(function(event) {
 		var value = event.target.value;
 		OC.AppConfig.setValue('discoursesso', 'scan_for_title', value);
-		$scan_for_title.next("img").show(0).delay(500).fadeOut('slow');
+		$msg.show(0).delay(500).fadeOut('slow');
 	});
 
 	$avatar_url.change(function(event) {
 		var value = event.target.value;
 		OC.AppConfig.setValue('discoursesso', 'avatar_url', value);
-		$avatar_url.next("img").show(0).delay(500).fadeOut('slow');
+		$msg.show(0).delay(500).fadeOut('slow');
 	});
 
 	$avatar_token.change(function(event) {
 		var value = event.target.value;
 		OC.AppConfig.setValue('discoursesso', 'avatar_token', value);
-		$avatar_token.next("img").show(0).delay(500).fadeOut('slow');
+		$msg.show(0).delay(500).fadeOut('slow');
 	});
 
 	$force_update.change(function(event) {
@@ -74,6 +75,17 @@ $(document).ready(function() {
 			value = "false"
 		}
 		OC.AppConfig.setValue('discoursesso', 'force_update', value);
-		$force_update.next().next("img").show(0).delay(500).fadeOut('slow');
+		$msg.show(0).delay(500).fadeOut('slow');
 	});
+
+	$exclude_groups.change(function(event) {
+		var value;
+		if (event.target.checked) {
+			value = "true"
+		} else {
+			value = "false"
+		}
+		OC.AppConfig.setValue('discoursesso', 'exclude_groups', value);
+		$msg.show(0).delay(500).fadeOut('slow');
+	});	
 });
