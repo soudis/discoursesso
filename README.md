@@ -17,7 +17,14 @@ The app can be built by using the provided Makefile by running:
 
 ## Configuration
 
-* To configure Discourse to use SSO please see https://meta.discourse.org/t/official-single-sign-on-for-discourse-sso/13045
+To configure Discourse to use SSO please also see https://meta.discourse.org/t/official-single-sign-on-for-discourse-sso/13045
+
+In Discourse:
+* set "discourse connect url" to `https://<YOURNEXTCCLOUD>/index.php/apps/discoursesso`
+* set "discourse connect secret"
+* set override settings to your likings
+
+In Nextcloud:
 * To configure this app go to the security section of the nextcloud settings page and put in the client secret and the discourss URL. 
 
 ### Replace whitespaces in user names and group names (optional)
