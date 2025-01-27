@@ -69,7 +69,7 @@ class DiscourseController extends Controller {
             $url .= '/';
 
             if ($header !== '') {
-               	return $url.$name."?".$header;
+               	return $url.$name.$header;
             } else {
                 return $url.$name;
             }
