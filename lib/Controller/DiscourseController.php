@@ -9,7 +9,6 @@ use OCP\AppFramework\Http\RedirectResponse;
 use OCP\AppFramework\Controller;
 use OCP\IUserManager;
 use OCP\IGroupManager;
-use OCP\ILogger;
 use OCP\IUserSession;
 use OCP\IURLGenerator;
 use Cviebrock\DiscoursePHP\SSOHelper;
@@ -23,11 +22,10 @@ class DiscourseController extends Controller {
     private $groupManager;
     private $urlGenerator;
 
-    public function __construct($AppName, IRequest $request, IConfig $config, IUserManager $userManager,IGroupManager $groupManager, ILogger $logger, IUserSession $userSession, IURLGenerator $urlGenerator, $UserId){
+    public function __construct($AppName, IRequest $request, IConfig $config, IUserManager $userManager,IGroupManager $groupManager, IUserSession $userSession, IURLGenerator $urlGenerator, $UserId){
             parent::__construct($AppName, $request);
             $this->userId = $UserId;
             $this->config = $config;
-            $this->logger = $logger;
             $this->userManager = $userManager;
             $this->userSession = $userSession;
             $this->groupManager = $groupManager;
