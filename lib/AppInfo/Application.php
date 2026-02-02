@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace OCA\DiscourseSSO\AppInfo;
 
+use OCA\DiscourseSSO\Listener\CSPListener;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
-use OCP\Notification\IManager;
-use OCP\User\Events;
+use OCP\Security\CSP\AddContentSecurityPolicyEvent;
 
 class Application extends App implements IBootstrap
 {
@@ -21,7 +21,8 @@ class Application extends App implements IBootstrap
 
     public function register(IRegistrationContext $context): void
     {
-        // ... registration logic goes here ...
+        // Register CSP event listener to allow form submissions to the Discourse SSO URL
+        $context->registerEventListener(AddContentSecurityPolicyEvent::class, CSPListener::class);
 
         // Register the composer autoloader for packages shipped by this app, if applicable
         include_once __DIR__ . '/../../vendor/autoload.php';
@@ -29,13 +30,7 @@ class Application extends App implements IBootstrap
 
     public function boot(IBootContext $context): void
     {
-        $manager = \OC::$server->getContentSecurityPolicyManager();
-        $policy = new \OCP\AppFramework\Http\EmptyContentSecurityPolicy();
-        $ssoUrl = \OC::$server->getConfig()->getAppValue('discoursesso', 'clienturl');
-
-
-        $policy->addAllowedFormActionDomain($ssoUrl);
-        $manager->addDefaultPolicy($policy);
+        // CSP is now handled via the AddContentSecurityPolicyEvent listener
     }
 
 }
